@@ -1,5 +1,5 @@
-@import "../../../styles/variables";
-@import "../../../styles/mixins";
+@import "../../styles/variables";
+@import "../../styles/mixins";
 
 .facet {
   width: 350px;
@@ -36,7 +36,7 @@
         transition: transform 0.2s;
         cursor: pointer;
       }
-      .filter{
+      .filter {
         @include svg-icon;
         width: 20px;
         height: 20px;
@@ -50,7 +50,7 @@
     .chevron {
       transform: rotate(180deg);
     }
-    .bucket-list{
+    .bucket-list {
       max-height: 0;
       transition: max-height 0.3s;
     }

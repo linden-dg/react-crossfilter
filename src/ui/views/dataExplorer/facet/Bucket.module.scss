@@ -2,7 +2,6 @@
 @import "../../../styles/mixins";
 
 $transition: background 0.1s ease-in-out, color 0.1s ease-in-out;
-$close-icon-dim: 16px;
 
 .bucket {
   border-radius: 14px;
@@ -23,7 +22,7 @@ $close-icon-dim: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  transition:$transition;
+  transition: $transition;
 
   &:focus,
   &:active {
@@ -35,28 +34,28 @@ $close-icon-dim: 16px;
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
-    padding-right: 6px;
   }
   .count {
     font-style: italic;
     min-width: 20px;
     opacity: 0.8;
+    padding-left: 6px;
   }
-  .close{
+  .close {
     position: relative;
     width: 0;
-    height: $close-icon-dim;
-    margin-left: 6px;
+    height: 16px;
     transition: width 0.2s ease-in-out;
     svg {
-      @include absolute-cover;
-      fill: $text-inverse-2;
+      position: absolute;
+      right: 0;
+      top: 0;
       width: 0;
-      height: $close-icon-dim;
+      height: 100%;
+      fill: $text-inverse-2;
       transition: width 0.2s ease-in-out;
     }
   }
-
 }
 
 .active {
@@ -65,10 +64,9 @@ $close-icon-dim: 16px;
   transition: $transition;
   box-shadow: $light-shadow;
   .close {
-    width: $close-icon-dim;
+    width: 22px;
     svg {
-      width: $close-icon-dim;
+      width: 16px;
     }
-
   }
 }

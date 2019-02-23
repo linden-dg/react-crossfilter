@@ -1,34 +1,44 @@
-//https://github.com/erikras/ducks-modular-redux
-//https://github.com/sillsdev/appbuilder-portal/tree/master/source/SIL.AppBuilder.Portal.Frontend/src/redux-store
 import React, { Component } from "react";
+import classnames from "classnames";
 import Crossfilter, {
   updateActiveFilters,
   checkActiveBucket
-} from "../../utils/crossfilterUtil";
+} from "../../store/Crossfilter";
+import { Facet as FacetType } from "../../store/CrossfilterTypes";
+import Facet from "./dataExplorer/Facet";
+import Button from "../components/Button/Button";
 
 import data from "../../data/data";
 import facetDefinitions from "../../data/facets";
-import Facet from "./Facet";
-import Button from "./Button/Button";
 
-// const xf = new Crossfilter(data, []);
+type Props = {};
+type State = {
+  facets: {
+    key: string;
+    buckets: { key: string; value: number }[];
+    type?: string;
+  }[];
+  facetOptions: FacetType[];
+  filters: { [key: string]: any };
+  xf: Crossfilter;
+};
 
-class Facets extends Component {
-  constructor() {
-    super();
+class Facets extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       facets: [],
       facetOptions: facetDefinitions,
-      filters: {}
+      filters: {},
+      xf: new Crossfilter()
     };
   }
 
   componentWillMount() {
-    const xf = new Crossfilter(data, []);
-    this.setState({ xf });
+    this.state.xf.init(data);
   }
 
-  filterFacet(bucket, key, type) {
+  filterFacet(bucket: any, key: string, type?: string) {
     let newFilters = updateActiveFilters(this.state.filters[key], bucket, type);
     this.setState({
       filters: { ...this.state.filters, [key]: newFilters }
@@ -38,7 +48,7 @@ class Facets extends Component {
     this.updateFacets();
   }
 
-  toggleFacet(facet) {
+  toggleFacet(facet: FacetType) {
     const xf = this.state.xf;
     if (xf.facetExists(facet.key)) {
       xf.removeFacet(facet.key);
@@ -69,8 +79,8 @@ class Facets extends Component {
         <div>
           {facetOptions.map(option => (
             <Button
-              className={{ active: xf.facetExists(option.key) }}
-              onClick={e => this.toggleFacet(option, e)}
+              className={classnames({ active: xf.facetExists(option.key) })}
+              onClick={() => this.toggleFacet(option)}
               key={option.key}
             >
               {" "}
@@ -88,7 +98,7 @@ class Facets extends Component {
               facetKey={facet.key}
               type={facet.type}
               buckets={facet.buckets}
-              filterFacet={(bucket, key, type) =>
+              filterFacet={(bucket, key, type?: string) =>
                 this.filterFacet(bucket, key, type)
               }
               checkBucket={checkActiveBucket}

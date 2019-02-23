@@ -3,7 +3,7 @@ import classnames from "classnames";
 import styles from "./Facet.module.scss";
 import { ReactComponent as Chevron } from "../../../assets/icons/chevron-up.svg";
 import { ReactComponent as ClearFilter } from "../../../assets/icons/filter-remove.svg";
-import Bucket from "./Bucket";
+import Bucket from "./facet/Bucket";
 
 type Props = {
   facetKey: string;
@@ -11,11 +11,11 @@ type Props = {
     key: string;
     value: number;
   }[];
-  type: string;
+  type?: string;
   filterFacet: (
     bucketKey: string | null,
     facetKey: string,
-    facetType: string
+    facetType?: string
   ) => void;
   checkBucket: (key: string, filters: []) => boolean;
   filters: [];
