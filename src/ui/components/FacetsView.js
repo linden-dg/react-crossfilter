@@ -9,6 +9,7 @@ import Crossfilter, {
 import data from "../../data/data";
 import facetDefinitions from "../../data/facets";
 import Facet from "./Facet";
+import Button from "./Button/Button";
 
 // const xf = new Crossfilter(data, []);
 
@@ -28,7 +29,6 @@ class Facets extends Component {
   }
 
   filterFacet(bucket, key, type) {
-    console.log(bucket);
     let newFilters = updateActiveFilters(this.state.filters[key], bucket, type);
     this.setState({
       filters: { ...this.state.filters, [key]: newFilters }
@@ -63,22 +63,20 @@ class Facets extends Component {
 
   render() {
     const { facets, facetOptions, xf, filters } = this.state;
-    console.log(xf, facets);
 
     return (
       <div>
         <div>
           {facetOptions.map(option => (
-            <div
+            <Button
+              className={{ active: xf.facetExists(option.key) }}
               onClick={e => this.toggleFacet(option, e)}
               key={option.key}
-              style={{
-                backgroundColor: xf.facetExists(option.key) ? "#00ffff" : ""
-              }}
             >
+              {" "}
               {option.key}{" "}
               <span>{xf.facetExists(option.key) ? "(Active)" : ""}</span>
-            </div>
+            </Button>
           ))}
         </div>
         <hr />

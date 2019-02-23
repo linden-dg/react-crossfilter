@@ -1,0 +1,38 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+.button{
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  min-height: 36px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: $light-shadow;
+
+  &:hover{
+    color: $primary;
+    border-color: $primary;
+    background-color: $primary;
+  }
+
+  &:active{
+    box-shadow: $heavy-shadow;
+  }
+
+
+  &.rounded{
+    border-radius: 100%;
+  }
+  .outline{
+    background-color: #fff;
+    border: 2px solid $primary;
+
+    &:hover{
+      color: #fff;
+      border-color: $primary;
+      background-color: $primary;
+    }
+
+  }
+}

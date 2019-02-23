@@ -1,1 +1,1 @@
-export { default } from "./Facet";
+export { default } from "./Facet.tsx";
