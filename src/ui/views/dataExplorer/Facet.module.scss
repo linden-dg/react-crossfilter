@@ -53,6 +53,9 @@
     .bucket-list {
       max-height: 0;
       transition: max-height 0.3s;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }
@@ -64,7 +67,27 @@
   align-items: flex-start;
   align-content: flex-start;
   justify-content: flex-start;
-  max-height: 2000px;
+  max-height: 500px;
   transition: max-height 0.3s;
-  overflow: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f2f2f2;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 8px;
+    background: #bfbfbf;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: #cccccc;
+  }
 }
