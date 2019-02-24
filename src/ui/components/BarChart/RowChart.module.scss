@@ -1,0 +1,56 @@
+$main: #4f398c;
+$deselect: #e0e0e0;
+$deselect-highlight: #a9a9a9;
+
+$theme-defaults: #f9d3df, #c6efd2, #b0e4e0, #abcbed;
+$theme-highlights: #4f398c, #5cbe7a, #4a9791, #486d95;
+
+.row-chart {
+  shape-rendering: crispEdges;
+  .overlay {
+    fill: #c1c1c1;
+    fill-opacity: 0.2;
+  }
+  .bar {
+    rect {
+      fill: $main;
+    }
+
+    &.deselect {
+      rect {
+        fill: $deselect !important;
+      }
+      &.highlight {
+        rect {
+          fill: $deselect-highlight !important;
+        }
+      }
+    }
+
+    text {
+      // display: none;
+      font-size: 12px;
+      dominant-baseline: middle;
+      z-index: 1;
+      &.bar-label {
+        fill: #fff;
+      }
+    }
+
+    &:hover {
+      text {
+        display: inherit;
+      }
+    }
+  }
+
+  .axis {
+    path,
+    .tick line {
+      stroke: #a9a9a9;
+    }
+    .tick text {
+      fill: #969595;
+    }
+  }
+}

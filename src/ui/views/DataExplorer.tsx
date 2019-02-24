@@ -9,6 +9,7 @@ import Button from "../components/Button/Button";
 
 import data from "../../data/data";
 import facetDefinitions from "../../data/facets";
+import RowChart from "../components/BarChart/RowChart";
 
 type Props = {};
 type State = {
@@ -80,7 +81,7 @@ class Facets extends Component<Props, State> {
             <Button
               onClick={() => this.toggleFacet(option)}
               key={option.key}
-              variant={xf.facetExists(option.key)?"solid":""}
+              variant={xf.facetExists(option.key) ? "solid" : ""}
             >
               {option.key}
             </Button>
@@ -88,20 +89,33 @@ class Facets extends Component<Props, State> {
         </div>
         <hr />
 
-        <div>
-          {facets.map(facet => (
-            <Facet
-              key={facet.key}
-              facetKey={facet.key}
-              type={facet.type}
-              buckets={facet.buckets}
-              filterFacet={(bucket, key, type?: string) =>
-                this.filterFacet(bucket, key, type)
-              }
-              checkBucket={checkActiveBucket}
-              filters={filters[facet.key]}
-            />
-          ))}
+        <div style={{ display: "flex" }}>
+          <div>
+            {facets.map(facet => (
+              <Facet
+                key={facet.key}
+                facetKey={facet.key}
+                type={facet.type}
+                buckets={facet.buckets}
+                filterFacet={(bucket, key, type?: string) =>
+                  this.filterFacet(bucket, key, type)
+                }
+                checkBucket={checkActiveBucket}
+                filters={filters[facet.key]}
+              />
+            ))}
+          </div>
+          <div style={{ flexGrow: 1 }}>
+            {facets.map(facet => (
+              <RowChart
+                data={facet.buckets.map(bucket => {
+                  return { x: bucket.key, y: bucket.value };
+                })}
+                width={400}
+                height={200}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );
