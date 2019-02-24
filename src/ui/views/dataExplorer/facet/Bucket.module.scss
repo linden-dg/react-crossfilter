@@ -23,6 +23,9 @@ $transition: background 0.1s ease-in-out, color 0.1s ease-in-out;
   flex-direction: row;
   align-items: center;
   transition: $transition;
+  &:hover{
+    background: darken($background-2,10%);
+  }
 
   &:focus,
   &:active {
@@ -63,6 +66,9 @@ $transition: background 0.1s ease-in-out, color 0.1s ease-in-out;
   color: $text-inverse-2 !important;
   transition: $transition;
   box-shadow: $light-shadow;
+  &:hover{
+    background: darken($secondary,5%);
+  }
   .close {
     width: 22px;
     svg {

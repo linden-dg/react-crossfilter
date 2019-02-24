@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 import Crossfilter, {
   updateActiveFilters,
   checkActiveBucket
@@ -79,13 +78,11 @@ class Facets extends Component<Props, State> {
         <div>
           {facetOptions.map(option => (
             <Button
-              className={classnames({ active: xf.facetExists(option.key) })}
               onClick={() => this.toggleFacet(option)}
               key={option.key}
+              variant={xf.facetExists(option.key)?"solid":""}
             >
-              {" "}
-              {option.key}{" "}
-              <span>{xf.facetExists(option.key) ? "(Active)" : ""}</span>
+              {option.key}
             </Button>
           ))}
         </div>

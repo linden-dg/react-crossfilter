@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import classnames from "classnames";
 import styles from "./Facet.module.scss";
-import { ReactComponent as Chevron } from "../../../assets/icons/chevron-up.svg";
-import { ReactComponent as ClearFilter } from "../../../assets/icons/filter-remove.svg";
+import { ReactComponent as Chevron } from "../../assets/icons/chevron-up.svg";
+import { ReactComponent as ClearFilter } from "../../assets/icons/filter-remove.svg";
 import Bucket from "./facet/Bucket";
 
 type Props = {

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classnames from "classnames";
 import styles from "./Bucket.module.scss";
-import { ReactComponent as CloseIcon } from "../../../../assets/icons/close.svg";
+import { ReactComponent as CloseIcon } from "../../../assets/icons/close.svg";
 
 type Props = {
   name: string;
