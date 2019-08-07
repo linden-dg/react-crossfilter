@@ -9,7 +9,7 @@ import Button from "../components/Button/Button";
 
 // import data from "../../data/data";
 // import facetDefinitions from "../../data/facets";
-import { data, facetDefinitions } from "../../data/constipation"
+import { data, facetDefinitions } from "../../data/constipation";
 import RowChart from "../components/BarChart/RowChart";
 
 type Props = {};
@@ -64,7 +64,7 @@ class Facets extends Component<Props, State> {
     // if (facet.key === "Age" && xf.facetExists("Age")) {
     //   this.filterFacet([[1, 12]], "Age");
     // } else {
-      this.updateFacets();
+    this.updateFacets();
     // }
   }
 
@@ -90,45 +90,46 @@ class Facets extends Component<Props, State> {
         </div>
         <hr />
 
-        <div style={{ display: "flex" }}>
-          {facets.map(facet => ( facet.key !== 'data' &&
-            <Facet
-              key={facet.key}
-              facetKey={facet.key}
-              type={facet.type}
-              buckets={facet.buckets}
-              filterFacet={(bucket, key, type?: string) =>
-                this.filterFacet(bucket, key, type)
-              }
-              checkBucket={checkActiveBucket}
-              filters={filters[facet.key]}
-            />
-          ))}
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {facets.map(
+            facet =>
+              facet.key !== "data" && (
+                <div>
+                  <Facet
+                    key={facet.key}
+                    facetKey={facet.key}
+                    type={facet.type}
+                    buckets={facet.buckets}
+                    filterFacet={(bucket, key, type?: string) =>
+                      this.filterFacet(bucket, key, type)
+                    }
+                    checkBucket={checkActiveBucket}
+                    filters={filters[facet.key]}
+                  />
+                  <RowChart
+                    data={facet.buckets.map(bucket => {
+                      return { x: bucket.key, y: bucket.value };
+                    })}
+                    width={400}
+                    height={200}
+                  />
+                </div>
+              )
+          )}
         </div>
         <div style={{ flexGrow: 1 }}>
-          {facets.map(facet => ( facet.key === 'data' &&
-              <div>
+          {facets.map(
+            facet =>
+              facet.key === "data" && (
                 <div key={facet.key}>
-                  {
-                    facet.buckets.map((b:any) => (
-                      <div key={b.key[0]}>
-                        {b.key[1].disease}
-                      </div>
-                    ))
-                  }
+                  {facet.buckets.map((b: any) => (
+                    <div key={b.key[0]}>{b.key[1].disease}</div>
+                  ))}
                 </div>
-                <RowChart
-                  data={facet.buckets.map(bucket => {
-                    return { x: bucket.key, y: bucket.value };
-                  })}
-                  width={400}
-                  height={200}
-                />
-              </div>
-          ))}
+              )
+          )}
         </div>
       </div>
-
     );
   }
 }
