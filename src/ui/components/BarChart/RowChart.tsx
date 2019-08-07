@@ -52,11 +52,12 @@ class RowChart extends Component<Props, State> {
         .range([12, 6])
         .clamp(true)
     };
-    this.xAxis = d3
-      .axisBottom()
+    // @ts-ignore
+    this.xAxis = d3.axisBottom()
       .ticks(5)
       .scale(this.state.xScale)
       .tickFormat(props.axisFormat);
+    // @ts-ignore
     this.yAxis = d3.axisLeft().scale(this.state.yScale);
   }
 
@@ -129,7 +130,9 @@ class RowChart extends Component<Props, State> {
           ).length
       : yScale.domain().length;
 
+    // @ts-ignore
     d3.select(this.xAxisRef.current).call(this.xAxis);
+    // @ts-ignore
     d3.select(this.yAxisRef.current).call(this.yAxis);
 
     d3.select(this.yAxisRef.current)

@@ -148,7 +148,7 @@ class Crossfilter {
     // ------------------ Map -> Array of Objects ------------------
     return Array.from(this._groups.entries()).map(([k, v]) => ({
       key: k,
-      buckets: v.group.all(),
+      buckets: v.group.all().filter((b:any) =>b.value>0),
       type: this._dimensions.get(v.dimension).type
     }));
   }

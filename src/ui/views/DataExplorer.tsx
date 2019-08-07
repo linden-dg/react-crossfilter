@@ -7,8 +7,9 @@ import { Facet as FacetType } from "../../store/CrossfilterTypes";
 import Facet from "./dataExplorer/Facet";
 import Button from "../components/Button/Button";
 
-import data from "../../data/data";
-import facetDefinitions from "../../data/facets";
+// import data from "../../data/data";
+// import facetDefinitions from "../../data/facets";
+import { data, facetDefinitions } from "../../data/constipation"
 
 type Props = {};
 type State = {
@@ -58,12 +59,12 @@ class Facets extends Component<Props, State> {
       filters: { ...this.state.filters, [facet.key]: [] }
     });
 
-    //Testing range filter
-    if (facet.key === "Age" && xf.facetExists("Age")) {
-      this.filterFacet([[1, 12]], "Age");
-    } else {
+    // //Testing range filter
+    // if (facet.key === "Age" && xf.facetExists("Age")) {
+    //   this.filterFacet([[1, 12]], "Age");
+    // } else {
       this.updateFacets();
-    }
+    // }
   }
 
   updateFacets() {
@@ -72,6 +73,8 @@ class Facets extends Component<Props, State> {
 
   render() {
     const { facets, facetOptions, xf, filters } = this.state;
+
+    console.log(facets);
 
     return (
       <div>
@@ -89,7 +92,7 @@ class Facets extends Component<Props, State> {
         <hr />
 
         <div>
-          {facets.map(facet => (
+          {facets.map(facet => ( facet.key !== 'data' &&
             <Facet
               key={facet.key}
               facetKey={facet.key}
@@ -103,7 +106,21 @@ class Facets extends Component<Props, State> {
             />
           ))}
         </div>
+        <div>
+          {facets.map(facet => ( facet.key === 'data' &&
+            <div key={facet.key}>
+              {
+                facet.buckets.map((b:any) => (
+                  <div key={b.key[0]}>
+                    {b.key[1].disease}
+                  </div>
+                ))
+              }
+            </div>
+          ))}
+        </div>
       </div>
+
     );
   }
 }

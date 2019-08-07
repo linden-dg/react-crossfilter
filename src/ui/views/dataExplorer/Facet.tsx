@@ -59,7 +59,7 @@ const Facet: FC<Props> = ({
         </div>
       </div>
       <div className={styles["bucket-list"]}>
-        {buckets.map(bucket => (
+        {buckets.map(bucket => ( bucket.value >0 &&
           <Bucket
             key={`${facetKey}-${bucket.key}`}
             name={bucket.key}
