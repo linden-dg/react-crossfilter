@@ -10,6 +10,7 @@ import Button from "../components/Button/Button";
 // import data from "../../data/data";
 // import facetDefinitions from "../../data/facets";
 import { data, facetDefinitions } from "../../data/constipation"
+import RowChart from "../components/BarChart/RowChart";
 
 type Props = {};
 type State = {
@@ -74,8 +75,6 @@ class Facets extends Component<Props, State> {
   render() {
     const { facets, facetOptions, xf, filters } = this.state;
 
-    console.log(facets);
-
     return (
       <div>
         <div>
@@ -83,7 +82,7 @@ class Facets extends Component<Props, State> {
             <Button
               onClick={() => this.toggleFacet(option)}
               key={option.key}
-              variant={xf.facetExists(option.key)?"solid":""}
+              variant={xf.facetExists(option.key) ? "solid" : ""}
             >
               {option.key}
             </Button>
@@ -91,7 +90,7 @@ class Facets extends Component<Props, State> {
         </div>
         <hr />
 
-        <div>
+        <div style={{ display: "flex" }}>
           {facets.map(facet => ( facet.key !== 'data' &&
             <Facet
               key={facet.key}
@@ -106,17 +105,26 @@ class Facets extends Component<Props, State> {
             />
           ))}
         </div>
-        <div>
+        <div style={{ flexGrow: 1 }}>
           {facets.map(facet => ( facet.key === 'data' &&
-            <div key={facet.key}>
-              {
-                facet.buckets.map((b:any) => (
-                  <div key={b.key[0]}>
-                    {b.key[1].disease}
-                  </div>
-                ))
-              }
-            </div>
+              <div>
+                <div key={facet.key}>
+                  {
+                    facet.buckets.map((b:any) => (
+                      <div key={b.key[0]}>
+                        {b.key[1].disease}
+                      </div>
+                    ))
+                  }
+                </div>
+                <RowChart
+                  data={facet.buckets.map(bucket => {
+                    return { x: bucket.key, y: bucket.value };
+                  })}
+                  width={400}
+                  height={200}
+                />
+              </div>
           ))}
         </div>
       </div>
